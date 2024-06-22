@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Page</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50; /* Dark blue-gray */
+            --secondary-color: #2980b9; /* Bright blue */
+            --accent-color: #e74c3c; /* Red */
+            --background-color: #ecf0f1; /* Light gray */
+            --text-color: #2c3e50; /* Dark blue-gray */
+            --light-text-color: #7f8c8d; /* Medium gray */
+            --container-background: #ffffff; /* White */
+            --container-border: #bdc3c7; /* Light blue-gray */
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: gray;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 20px;
+            font-size: 2.5rem;
+        }
+
+        p {
+            color: var(--light-text-color);
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 5px solid var(--background-color);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .container {
+            padding: 20px;
+            background-color: var(--container-background);
+            border: 1px solid var(--container-border);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 90%;
+            margin: 20px;
+        }
+
+        .container::before {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 5px;
+            background-color: var(--accent-color);
+            margin: 0 auto 20px;
+            border-radius: 2px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            height: 80px;
+            font-size: 1rem;
+            border: 1px solid var(--container-border);
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><%= blog.blogName %></h1>
+        <img src="/<%= blog.blogImageUrl %>" alt="Blog Image">
+        <p><%= blog.blogDescription %></p>
+        <form action="/blog/comment/<%= blog._id %>/<%= user._id %>" method="POST">
+            <label for="comment">Comment</label>
+            <textarea  id="comment" name="comment"></textarea>
+            <input type="submit" style="margin-top: 5px;position:relative;left:700px; width: 100px; height: 30px;">
+        </form>
+        <h1>Comments</h1>
+        <% if (locals.commentDetails && locals.usernames) { %>
+            <% var i=0;commentDetails.forEach(comment => { %>
+             <h2><%= usernames[i] %></h2>
+             <p><%= comment.commentBody %></p>
+            <% i++ %>
+            <% }) %>
+        <% } %>
+        
+        
+    </div>
+</body>
+</html>

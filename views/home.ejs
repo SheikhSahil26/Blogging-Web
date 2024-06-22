@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        html {
+            font-size: 62.5%;
+        }
+        *:not(i) {
+            font-family: "Poppins", sans-serif;
+        }
+        header {
+            position: fixed;
+            width: 100%;
+            background-color: rgb(24, 30, 34);
+            padding: 3rem 5rem;
+            top: 0;
+            z-index: 1000;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        nav a {
+            font-size: 1.8rem;
+            text-decoration: none;
+        }
+        nav a#logo {
+            color: grey;
+            font-weight: 700;
+        }
+        nav ul a {
+            color: gray;
+            font-weight: 600;
+        }
+        nav ul a:hover {
+            border-bottom: 2px solid grey;
+        }
+        #ham-menu {
+            display: none;
+        }
+        nav ul.active {
+            left: 0;
+        }
+        @media only screen and (max-width: 991px) {
+            html {
+                font-size: 56.25%;
+            }
+            header {
+                padding: 2.2rem 5rem;
+            }
+        }
+        @media only screen and (max-width: 767px) {
+            html {
+                font-size: 50%;
+            }
+            #ham-menu {
+                display: block;
+                color: #ffffff;
+            }
+            nav a#logo,
+            #ham-menu {
+                font-size: 3.2rem;
+            }
+            nav ul {
+                background-color: black;
+                position: fixed;
+                left: -100vw;
+                top: 73.6px;
+                width: 100vw;
+                height: calc(100vh - 73.6px);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+                transition: 1s;
+                gap: 0;
+            }
+        }
+        @media only screen and (max-width: 575px) {
+            html {
+                font-size: 46.87%;
+            }
+            header {
+                padding: 2rem 3rem;
+            }
+            nav ul {
+                top: 65.18px;
+                height: calc(100vh - 65.18px);
+            }
+        }
+        main {
+            margin-top: 100px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .about-container {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            font-style: oblique;
+            background-color:grey;
+            border-radius: 5px;
+            margin-right: 20px;
+            height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+        .cards-wrapper {
+            flex: 2;
+            height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            width: 18rem;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 10px 10px 8px 7px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+        .card-body {
+            padding: 1rem;
+        }
+        .card-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .card-text {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            font-size: 1.4rem;
+            color: #fff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body style="background-color:grey;">
+    <header>
+        <nav>
+            <% if (username !== "Blogging App") { %>
+                <a href="#home" id="logo">Welcome, <%= username %></a>
+            <% } else { %>
+                <a href="#home" id="logo">BLOGGING APP</a>
+            <% } %>
+            <i class="fas fa-bars" id="ham-menu"></i>
+            <ul id="nav-bar">
+                <li><a href="home">Home</a></li>
+                <% if (username !== "Blogging App") { %>
+                    <li><a href="blog">Add Blog</a></li>
+                    <li><a href="profile?userId=<%= userId %>">Profile</a></li>
+                <% } %>
+                <% if (username === "Blogging App") { %>
+                    <li><a href="login">Login</a></li>
+                    <li><a href="signup">Signup</a></li>
+                <% } %>
+                <% if (username !== "Blogging App") { %>
+                    <li><a href="/user/logout">Logout</a></li>
+                <% } %>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="about-container">
+            <h1 style="font-size: 45px;">BLOGGING WEB</h1>
+            <br>
+            <p style="font-size: 24px;">Welcome to our blogging platform! Here you can find a variety of blog posts on different topics written by our users. Feel free to explore, add your own blogs, and interact with the community.</p>
+            <p style="font-size: 24px;">If you're new here, you can sign up to start your own blog and connect with other users. Existing users can log in to continue sharing their thoughts and experiences.</p>
+        </div>
+        
+        <div class="cards-wrapper">
+            <% if (locals.allBlogs && locals.userId) { %>
+                <div class="cards-container">
+                    <% allBlogs.forEach(blog => { %>
+                        <div class="card">
+                            <img src="<%= blog.blogImageUrl %>" class="card-img-top" alt="no image">
+                            <div class="card-body">
+                                <h1 class="card-title"><%= blog.blogName %></h1>
+                                <p class="card-text"><%= blog.blogDescription %></p>
+                                <a href="/blog/<%= blog._id %>/<%= userId %>" class="btn btn-primary">See blog</a>
+                                <% if (String(blog.createdBy) === userId) { %>
+                                    <a href="/blog/delete/<%= blog._id %>" class="btn btn-primary">Delete</a>
+                                <% } %>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } else { %>
+                <div class="cards-container">
+                    <% allBlogs.forEach(blog => { %>
+                        <div class="card">
+                            <img src="<%= blog.blogImageUrl %>" class="card-img-top" alt="no image">
+                            <div class="card-body">
+                                <h1 class="card-title"><%= blog.blogName %></h1>
+                                <p class="card-text"><%= blog.blogDescription %></p>
+                                <a href="/blog?blogId=<%= blog._id %>" class="btn btn-primary">See blog</a>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } %>
+        </div>
+    </main>
+    
+    <!-- Font Awesome Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script>
+        document.getElementById('ham-menu').addEventListener('click', function () {
+            const navBar = document.getElementById('nav-bar');
+            navBar.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
