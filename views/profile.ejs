@@ -147,8 +147,8 @@
                 <img src="<%= blog.blogImageUrl %>" alt="Blog Image">
                 <div class="card-body">
                     <h1 class="card-title"><%= blog.blogName %></h1>
-                    <p class="card-text"><%= blog.blogDescription %></p>
-                    <a href="/blog/<%= blog._id %>/<%= userId %>" class="btn">See blog</a>
+                    <p class="card-text"><%= blog.blogInShort %>...</p>
+                    <a href="/blog/<%= blog._id %>/<%= userId %>" class="btn">continue reading</a>
                     <a href="/blog/delete/<%= blog._id %>" class="btn btn-primary">Delete</a>
                 </div>
             </div>

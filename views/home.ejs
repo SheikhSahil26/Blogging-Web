@@ -209,7 +209,7 @@
                             <img src="<%= blog.blogImageUrl %>" class="card-img-top" alt="no image">
                             <div class="card-body">
                                 <h1 class="card-title"><%= blog.blogName %></h1>
-                                <p class="card-text"><%= blog.blogDescription %></p>
+                                <p class="card-text"><%= blog.blogInShort %>...</p>
                                 <a href="/blog/<%= blog._id %>/<%= userId %>" class="btn btn-primary">See blog</a>
                                 <% if (String(blog.createdBy) === userId) { %>
                                     <a href="/blog/delete/<%= blog._id %>" class="btn btn-primary">Delete</a>
@@ -225,7 +225,7 @@
                             <img src="<%= blog.blogImageUrl %>" class="card-img-top" alt="no image">
                             <div class="card-body">
                                 <h1 class="card-title"><%= blog.blogName %></h1>
-                                <p class="card-text"><%= blog.blogDescription %></p>
+                                <p class="card-text"><%= blog.blogInShort %></p>
                                 <a href="/blog?blogId=<%= blog._id %>" class="btn btn-primary">See blog</a>
                             </div>
                         </div>
