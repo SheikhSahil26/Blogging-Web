@@ -31,18 +31,21 @@ const userSchema=new Schema({
    {timestamps:true}
 );
 
-userSchema.pre('save',function(next){
-    const user=this;
-    if(!user.isModified("password"))return;
+
+//This is used for hashing password for exxtra safety but i will implement it in later projects!
+
+// userSchema.pre('save',function(next){
+//     const user=this;
+//     if(!user.isModified("password"))return;
     
-    const salt=randomBytes(16).toString();
-    const hashedPassword=createHmac("sha256",salt).update(user.password).digest("hex");
+//     const salt=randomBytes(16).toString();
+//     const hashedPassword=createHmac("sha256",salt).update(user.password).digest("hex");
 
-    this.salt=salt;
-    this.password=hashedPassword;
+//     this.salt=salt;
+//     this.password=hashedPassword;
 
-    next();
-})
+//     next();
+// })
 
 const User=model("user",userSchema);
 

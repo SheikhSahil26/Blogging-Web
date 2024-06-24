@@ -42,7 +42,7 @@ router.get("/signup",(req,res)=>{
 })
 
 router.get("/login",(req,res)=>{
-    return res.render("login");
+    return res.render("login",{"err":""});
 })
 
 

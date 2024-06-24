@@ -18,7 +18,7 @@ async function userLogin(req,res){
     // console.log("hello guys i am console.log");
     const user=await User.findOne({email,password});
     if(!user)return res.render("login",()=>{
-        console.log("invalid credentials"); 
+        return res.render('login',{"err":"Invalid Credentials"}) 
     })
    
     const sessionID=uuidv4();
