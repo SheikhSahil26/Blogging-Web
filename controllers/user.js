@@ -6,6 +6,17 @@ const {setUser}=require("../services/auth");
 
 async function userSignUp(req,res){
     const {name,email,password}=req.body;
+    const existingUserIDs = await User.find({}, { email: 1 });
+    const isDuplicate=existingUserIDs.some(user=>user.email.toString()===req.body.email.toString());
+
+     
+    if(isDuplicate)
+        {
+            // return res.json({error:"this email already exist"});
+            return res.render('signup',{"err":"USER already present"});
+            
+        }
+
     await User.create({
         name,
         email,

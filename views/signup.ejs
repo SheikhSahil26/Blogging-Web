@@ -135,6 +135,16 @@
        
     </form>
     
+    <% if (err) { %>
+     <script>
+       document.addEventListener('DOMContentLoaded', function() {
+          var msg = "<%= err %>";
+          if (msg) {
+              alert(msg);
+          }
+          });
+     </script>
+    <% } %>
   
 </body>
 
