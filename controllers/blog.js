@@ -6,7 +6,7 @@ const multer=require('multer');
 async function createBlog(req,res){
     const {blogName,blogDescription}=req.body; 
     const part=blogDescription.substring(0,21);
-    console.log(part);
+    console.log(req.file.path);
     await Blog.create({
         blogName,
         blogDescription,
