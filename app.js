@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 //requiring all the required things
 const express=require('express');
 const app=express();
@@ -7,7 +9,7 @@ const {checkAuth,restrictToLoggedInUserOnly}=require("./middlewares/auth");
 const multer=require("multer");
 
 //local port 
-const port=4100;
+const port=process.env.PORT || 1500;
 
 //requiring path for views 
 //telling that i am usig ejs template 
@@ -17,7 +19,8 @@ app.set("views",path.resolve("./views"));
 
 
 //connnecting to mongo db 
-mongoose.connect("mongodb://127.0.0.1:27017/blogging").then((e)=>console.log("mongoDB connected successfully"));
+mongoose.connect(process.env.MONGO_URL)
+.then((e)=>console.log("mongoDB connected successfully"));
 
 
 //middlewares
