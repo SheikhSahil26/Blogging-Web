@@ -26,7 +26,7 @@ mongoose.connect(process.env.MONGO_URL)
 //middlewares
 app.use(express.urlencoded({extended:false}));//for form data
 app.use(cookieParser());//for cookie parsing 
-app.use(express.static(path.join(__dirname,"./public")));//to display static images to our web 
+app.use(express.static(path.join(__dirname,"./")));//to display static images to our web 
 
 //routes
 const staticRoute=require("./routes/static");

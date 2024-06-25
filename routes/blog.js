@@ -14,7 +14,7 @@ router.get("/",(req,res)=>{
 
 const storage=multer.diskStorage({
     destination:function(req,file,cb){
-        return cb(null,process.env.imgpath);
+        return cb(null,"./");
     },
     filename:function(req,file,cb){
         return cb(null,`${file.originalname}`)
