@@ -9,7 +9,7 @@ const {checkAuth,restrictToLoggedInUserOnly}=require("./middlewares/auth");
 const multer=require("multer");
 
 //local port 
-const port=process.env.PORT || 1500;
+const port=process.env.PORT || 200;
 
 //requiring path for views 
 //telling that i am usig ejs template 
