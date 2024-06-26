@@ -18,6 +18,10 @@ const userSchema=new Schema({
         type:String,
         required:true,
     },
+    about:{
+        type:String,
+        required:false,
+    },
     profileImageUrl:{
         type:String,
         default:"public/sukuna-red-5120x2880-16933",

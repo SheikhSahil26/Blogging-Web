@@ -31,10 +31,12 @@ router.get("/home",async(req,res)=>{
 router.get("/profile",async(req,res)=>{
     const ID=new mongoose.Types.ObjectId(req.query.userId);
     const data=await User.findById(ID);
+    
     const profileImg=data.profileImageUrl;
     const username=data.name;
+    const about=data.about;
     const allBlogs=await Blog.find({createdBy:data._id});
-    return res.render("profile",{allBlogs:allBlogs,username,userId:ID,profileImg:profileImg});
+    return res.render("profile",{allBlogs:allBlogs,about,username,userId:ID,profileImg:profileImg});
 })
 
 router.get("/signup",(req,res)=>{
@@ -45,6 +47,12 @@ router.get("/login",(req,res)=>{
     
     return res.render("login",{"err":""});
 })
+
+router.get("/editprofile/:userId",(req,res)=>{
+    const ID=req.params.userId;
+    return res.render("editprofile",{userId:ID});
+})
+
 
 
 

@@ -132,13 +132,13 @@
 <body style="background-color: grey;">
     <div class="navbar">
         <li><a href="blog">Add Blog</a></li>
-        <a href="#">Profile</a>
+        <a href="/editprofile/<%= userId %>">Edit Profile</a>
         <li><a href="/user/logout">Logout</a></li>
     </div>
     <div class="profile-header">
         <img src="/sukuna-red-5120x2880-16933.png" alt="Profile Picture">
         <h1><%= username %></h1>
-        <p>I am a passionate WEB developer and i also love to write blogs.</p>
+        <p><%= about  %></p>
     </div>
     <h1 style="text-align: center;">Your BLOGS</h1>
     <div class="cards-container">

@@ -21,6 +21,7 @@ async function userSignUp(req,res){
         name,
         email,
         password,
+        about:"",
     })
     return res.redirect('/login');
 }

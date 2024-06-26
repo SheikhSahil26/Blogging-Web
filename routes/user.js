@@ -8,7 +8,12 @@ router.post("/signup",userSignUp);
 
 router.post("/login",userLogin);
 
-
+router.post("/editprofile/:userId",async(req,res)=>{
+    const newbody=req.body;
+    const user=await User.findByIdAndUpdate(req.params.userId,{name:newbody.name,about:newbody.info});
+    
+    return res.redirect(`/profile?userId=${req.params.userId}`);
+})
 // router.get("/home",async(req,res)=>{
 //     const data=JSON.parse(decodeURIComponent(req.query.user));
 //     username=data.name;
