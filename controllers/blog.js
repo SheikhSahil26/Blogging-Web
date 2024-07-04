@@ -7,6 +7,7 @@ async function createBlog(req,res){
     const {blogName,blogDescription}=req.body; 
     const part=blogDescription.substring(0,21);
     console.log(req.file.path);
+    console.log(req.user);
     await Blog.create({
         blogName,
         blogDescription,

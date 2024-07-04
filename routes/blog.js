@@ -7,17 +7,21 @@ const multer=require('multer');
 const path=require('path');
 const User=require("../models/user")
 const Comment=require("../models/comments")
+const fs=require('fs');
 
 router.get("/",(req,res)=>{
     return res.render("blog");
 });
+ const uploadDir=process.env.uploadDir || path.join(__dirname,"..",'public','image');
 
 const storage=multer.diskStorage({
     destination:function(req,file,cb){
-        return cb(null,"./");
+        const uploadPath = path.join(uploadDir,'./');
+        fs.mkdirSync(uploadPath, { recursive: true });
+        cb(null, uploadPath);
     },
     filename:function(req,file,cb){
-        return cb(null,`${file.originalname}`)
+        return cb(null,Date.now()+"-"+file.originalname);
     }
 })
 
