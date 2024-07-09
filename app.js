@@ -9,7 +9,7 @@ const {checkAuth,restrictToLoggedInUserOnly}=require("./middlewares/auth");
 const multer=require("multer");
 
 //local port 
-const port=process.env.PORT || 200;
+const port=process.env.PORT || 5000;
 
 //requiring path for views 
 //telling that i am usig ejs template 
@@ -19,7 +19,8 @@ app.set("views",path.resolve("./views"));
 
 
 //connnecting to mongo db 
-mongoose.connect(process.env.MONGO_URL)
+const mong = process.env.MONGO_URL || "mongodb+srv://sahilsheikh261204:zilbDfveIEEMi8Ny@unveil.ho6o4dk.mongodb.net/?retryWrites=true&w=majority&appName=unveil";
+mongoose.connect(mong)
 .then((e)=>console.log("mongoDB connected successfully"));
 
 
