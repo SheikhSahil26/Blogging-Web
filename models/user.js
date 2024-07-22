@@ -24,7 +24,7 @@ const userSchema=new Schema({
     },
     profileImageUrl:{
         type:String,
-        default:"public/sukuna-red-5120x2880-16933",
+        default:"public/image/sukuna-red-5120x2880-16933.png",
     },
     role:{
         type:String,
