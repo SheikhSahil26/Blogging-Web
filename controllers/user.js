@@ -2,7 +2,7 @@ const User=require("../models/user");
 const Blog=require("../models/blog")
 const mongoose=require("mongoose");
 const {v4:uuidv4} = require('uuid');
-const {setUser}=require("../services/auth");
+const {setUser,getUser}=require("../services/auth");
 
 async function userSignUp(req,res){
     const {name,email,password}=req.body;
